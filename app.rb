@@ -16,6 +16,10 @@ get '/' do
   'hello'
 end
 
+get '/countries' do
+  "#{Country.count} Countries"
+end
+
 
 end # class CountryCodesApp
 

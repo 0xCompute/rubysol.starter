@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 ## web library/framework
 gem 'sinatra'
 
+gem 'fetcher'  ## add for downloading zip archive
 
 ## database access
 gem 'activerecord'
