@@ -13,11 +13,7 @@ include WorldDb::Models
 # Controllers / Routing / Request Handlers
 
 get '/' do
-  'hello'
-end
-
-get '/countries' do
-  "#{Country.count} Countries"
+  erb :index
 end
 
 

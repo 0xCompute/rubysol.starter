@@ -15,14 +15,14 @@ Step 1: Install all libraries (gem) using bundler
 
 Step 2: Download world.db datasets in a zip archive (~150 KiB); create world.db database and tables; load datasets using rake
 
-    $ mkdir ./tmp       # world.db zip archive will get downloaded to tmp folder in your working folder
+    $ mkdir ./tmp       # world.db zip archive will get downloaded to tmp folder
     $ rake setup_world
 
 or use individual tasks
 
     $ rake dl_world create_world load_world
 
-Step 3: Startup the server and open up the browser.
+Step 3: Startup the web server and open up the country codes page in your web browser
 
     $ rackup
 
