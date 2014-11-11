@@ -1,0 +1,4 @@
+
+require './boot'
+
+run CountryCodesApp
