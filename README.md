@@ -1,6 +1,73 @@
 # world.db.codes
 
-world.db web app for country codes (alpha 2, alpha 3, internet top level domains, motor vehicle license plates, etc.)
+world.db web app for country codes (alpha 2, alpha 3, fifa, ioc, internet top level domains, motor vehicle license plates, etc.)
+
+```ruby
+class CountryCodesApp < Sinatra::Base
+
+  include WorldDb::Models  ## (re)use models from worlddb gem
+
+  get '/' do
+    erb :index
+  end
+
+end
+```
+
+(Source: [`app.rb`](app.rb))
+
+
+Sample template snippet:
+
+```html
+<h3><%= Country.count %> Countries </h3>
+
+<table>
+  <tr>
+     <td></td><td>TLD</td>
+     <td></td><td>FIFA</td>
+     <td></td><td>ISO3</td>
+     <td>Motor</td>
+     <td>UN?</td>
+     <td>FIFA?</td>
+     <td>Languages</td>
+  </tr>
+
+  <% Country.by_title.each do |country| %>
+    <tr>
+     <td class='country-key'><%= country.key %></td>
+     <td>
+        <% if country.net.present? %>
+          <% if country.net != country.key %>
+            <span class='code-ne'>≠ </span>
+          <% end %>
+          .<%= country.net %>
+        <% else %>
+            <span class='code-x'>x</span>
+        <% end %>
+     </td>
+     <td>
+        <%= country.title %>
+       <span class='country-key'>
+        <%= '*supra'      if country.is_supra?      %>
+        <%= '*dependency' if country.is_dependency? %>
+       </span>
+     </td>
+     <td>
+        <% if country.fifa.present? %>
+            <%= country.fifa %>
+            <% if country.fifa != country.code %>
+              <span class='code-ne'><%= country.fifa %> ≠</span>
+            <% end %>
+        <% else %>
+            <span class='code-x'>x</span>
+        <% end %>
+    </td>
+...
+```
+
+(Source: [`views/index.erb`](views/index.erb))
+
 
 ## Live Demo
 

@@ -1,7 +1,5 @@
 
-
 <h3><%= Country.count %> Countries </h3>
-
 
 <table>
   <tr>
@@ -23,10 +21,9 @@
      <td style='white-space: nowrap;'>
         <% if country.net.present? %>
           <% if country.net != country.key %>
-            <span class='code-ne'>&ne; .<%= country.net %></span>
-          <% else %>
-            .<%= country.net %>
+            <span class='code-ne'>&ne; </span>
           <% end %>
+          .<%= country.net %>
         <% else %>
             <span class='code-x'>x</span>
         <% end %>
@@ -38,12 +35,11 @@
         <%= '*dependency' if country.is_dependency? %>
        </span>
      </td>
-     <td  style='white-space: nowrap;'>
+     <td style='white-space: nowrap;'>
         <% if country.fifa.present? %>
+          <%= country.fifa %>
           <% if country.fifa != country.code %>
-            <span class='code-ne'><%= country.fifa %> &ne;</span>
-          <% else %>
-            <%= country.fifa %>
+            <span class='code-ne'> &ne;</span>
           <% end %>
         <% else %>
             <span class='code-x'>x</span>
@@ -53,10 +49,9 @@
      <td  style='white-space: nowrap;'>
         <% if country.iso3.present? %>
           <% if country.iso3 != country.code %>
-            <span class='code-ne'>&ne; <%= country.iso3 %></span>
-          <% else %>
-            <%= country.iso3 %>
+            <span class='code-ne'>&ne; </span>
           <% end %>
+          <%= country.iso3 %>
         <% else %>
             <span class='code-x'>x</span>
         <% end %>
