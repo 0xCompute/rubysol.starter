@@ -29,7 +29,7 @@ end
 ## import world.db dataset
 task :load_world => [:delete_world] do
   # NOTE: assume env (database connection) is setup
-  WorldDb.read_setup_from_zip( WORLD_NAME, 'setups/sport.db.admin', ZIP_PATH, { skip_tags: true } )
+  WorldDb.read_setup_from_zip( WORLD_NAME, 'setups/countries', ZIP_PATH, { skip_tags: true } )
 end
 
 task :delete_world do

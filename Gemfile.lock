@@ -52,7 +52,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    worlddb (2.0.5)
+    worlddb (2.0.6)
       activerecord
       gli (>= 2.9)
       logutils
