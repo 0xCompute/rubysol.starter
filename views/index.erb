@@ -1,21 +1,94 @@
 
-<h3><%= Country.count %> Countries </h3>
+  <!--
+   todo: move to partial
+   -->
+
+<!-- fix:
+  move back to/use in header
+    "hard code" Country
+    do NOT depend on filter
+  -->
+<p>
+  <%= link_to('Country Codes', '/') %>
+   <span class='country-count'>
+    (<%= Country.where( where_clause ).count %>)
+   </span>  ›
+<% Continent.order(:id).each_with_index do |continent,i| %>
+   <% if i > 0 %> • <% end %>
+   <%= link_to_continent( continent ) %>
+   <span class='country-count'>
+      (<%= continent.countries.where( where_clause ).count %>)
+   </span>
+<% end %>
+</p>
+
+<!--
+   All
+   <span class='country-count'>
+    (<%= Country.count %>)
+   </span>
+
+   • Countries
+   <span class='country-count'>
+    (<%= Country.where(c:true).count %>)
+   </span>
+ 
+   • Territories
+   <span class='country-count'>
+    (<%= Country.where(d:true).count %>)
+   </span>
+-->
+
+
+<h2>
+  <%= countries_count %> <%= title %>
+    ›  
+
+  <% supra_count = countries.where(s:true).count
+     if supra_count > 0 %>
+    <%= supra_count %> Supras /
+  <% end %>
+   <%= countries.where(c:true).count %> Countries /
+   <%= countries.where(d:true).count %> Territories
+</h2>
+
+<!-- old version
+<h2>
+  <%= title %>
+  <span class='country-count'>(<%= countries_count %>)</span>  › 
+
+  <% supra_count = countries.where(s:true).count
+     if supra_count > 0 %>
+   Supras <span class='country-count'>(<%= supra_count %>)</span> +
+  <% end %>
+   Countries <span class='country-count'>(<%= countries.where(c:true).count %>)</span> +  
+   Territories <span class='country-count'>(<%= countries.where(d:true).count %>)</span>
+</h2>
+-->
+
+<!--
+   todo: use country partial
+-->
 
 <table>
   <tr>
      <td></td>
      <td>TLD</td>
+     <td>A2</td>
      <td></td>
      <td>FIFA</td>
      <td></td>
-     <td>ISO3</td>
+     <td>IOC</td>
+     <td>A3</td>
      <td>Motor</td>
+     <td>FIPS</td>
+     <td>Num</td>
      <td>UN?</td>
      <td>FIFA?</td>
      <td>Languages</td>
   </tr>
 
-  <% Country.by_title.each do |country| %>
+  <% countries.each do |country| %>
     <tr>
      <td class='country-key'><%= country.key %></td>
      <td style='white-space: nowrap;'>
@@ -29,10 +102,32 @@
         <% end %>
      </td>
      <td>
+       <% if country.alpha2.present? %>
+           <%= country.alpha2 %> 
+       <% else %>
+           <span class='code-x'>x</span>
+       <% end %>
+     </td>
+<!--
+     <td>
+        <span class='country-key'>
+           <%= country.continent.name %>
+        </span>
+     </td>
+-->
+     <td>
         <%= country.title %>
+
+        <% if country.is_dependency? %>
+          (<%= country.parent.key.upcase %>)
+        <% end %>
+        
        <span class='country-key'>
+         › <%= country.continent.name %>
         <%= '*supra'      if country.is_supra?      %>
-        <%= '*dependency' if country.is_dependency? %>
+        <% if country.is_dependency? %>
+          &nbsp; *dependency
+        <% end %>
        </span>
      </td>
      <td style='white-space: nowrap;'>
@@ -45,13 +140,16 @@
             <span class='code-x'>x</span>
         <% end %>
     </td>
+     <td>
+      <%= country.ioc %>
+     </td>
      <td><%= country.code %></td>
      <td  style='white-space: nowrap;'>
-        <% if country.iso3.present? %>
-          <% if country.iso3 != country.code %>
+        <% if country.alpha3.present? %>
+          <% if country.alpha3 != country.code %>
             <span class='code-ne'>&ne; </span>
           <% end %>
-          <%= country.iso3 %>
+          <%= country.alpha3 %>
         <% else %>
             <span class='code-x'>x</span>
         <% end %>
@@ -62,6 +160,12 @@
         <% else %>
             <span class='code-x'>x</span>
         <% end %>
+     </td>
+     <td>
+      <%= country.fips %>
+     </td>
+     <td>
+       <%= country.num %>
      </td>
      <td>
         <!-- check if un tag present

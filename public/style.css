@@ -33,6 +33,7 @@ a:visited {
    font-weight: bold;
 }
 
+.country-count,
 .country-key {
   color:     #333333;  /*  dark-gray  */
   font-size: 12px;     /* ~80%  */
