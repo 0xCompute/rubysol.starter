@@ -32,6 +32,10 @@ task :load_world => [:delete_world] do
   WorldDb.read_setup_from_zip( WORLD_NAME, 'setups/countries', ZIP_PATH, { skip_tags: true } )
 end
 
+task :update_world do
+  WorldDb::Model::CountryCode.update!   # auto-create (update) country codes (from countries)
+end
+
 task :delete_world do
   LogDb.delete!
   ConfDb.delete!
