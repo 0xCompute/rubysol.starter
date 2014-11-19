@@ -1,44 +1,4 @@
 
-  <!--
-   todo: move to partial
-   -->
-
-<!-- fix:
-  move back to/use in header
-    "hard code" Country
-    do NOT depend on filter
-  -->
-<p>
-  <%= link_to('Country Codes', '/') %>
-   <span class='country-count'>
-    (<%= Country.where( where_clause ).count %>)
-   </span>  ›
-<% Continent.order(:id).each_with_index do |continent,i| %>
-   <% if i > 0 %> • <% end %>
-   <%= link_to_continent( continent ) %>
-   <span class='country-count'>
-      (<%= continent.countries.where( where_clause ).count %>)
-   </span>
-<% end %>
-</p>
-
-<!--
-   All
-   <span class='country-count'>
-    (<%= Country.count %>)
-   </span>
-
-   • Countries
-   <span class='country-count'>
-    (<%= Country.where(c:true).count %>)
-   </span>
- 
-   • Territories
-   <span class='country-count'>
-    (<%= Country.where(d:true).count %>)
-   </span>
--->
-
 
 <h2>
   <%= countries_count %> <%= title %>
@@ -52,153 +12,18 @@
    <%= countries.where(d:true).count %> Territories
 </h2>
 
-<!-- old version
-<h2>
-  <%= title %>
-  <span class='country-count'>(<%= countries_count %>)</span>  › 
 
-  <% supra_count = countries.where(s:true).count
-     if supra_count > 0 %>
-   Supras <span class='country-count'>(<%= supra_count %>)</span> +
-  <% end %>
-   Countries <span class='country-count'>(<%= countries.where(c:true).count %>)</span> +  
-   Territories <span class='country-count'>(<%= countries.where(d:true).count %>)</span>
-</h2>
--->
+<p>
+  Filter: <%= link_to 'All', '?' %> › 
+          <%= link_to 'Countries', '?c=t&s=f&d=f' %> •
+          <%= link_to 'Territories', '?c=f&s=f&d=t' %>
+</p>
 
-<!--
-   todo: use country partial
--->
 
 <table>
-  <tr>
-     <td></td>
-     <td>TLD</td>
-     <td>A2</td>
-     <td></td>
-     <td>FIFA</td>
-     <td></td>
-     <td>IOC</td>
-     <td>A3</td>
-     <td>Motor</td>
-     <td>FIPS</td>
-     <td>Num</td>
-     <td>UN?</td>
-     <td>FIFA?</td>
-     <td>Languages</td>
-  </tr>
-
+  <%= erb :'shared/_table_header_country' %>
+ 
   <% countries.each do |country| %>
-    <tr>
-     <td class='country-key'><%= country.key %></td>
-     <td style='white-space: nowrap;'>
-        <% if country.net.present? %>
-          <% if country.net != country.key %>
-            <span class='code-ne'>&ne; </span>
-          <% end %>
-          .<%= country.net %>
-        <% else %>
-            <span class='code-x'>x</span>
-        <% end %>
-     </td>
-     <td>
-       <% if country.alpha2.present? %>
-           <%= country.alpha2 %> 
-       <% else %>
-           <span class='code-x'>x</span>
-       <% end %>
-     </td>
-<!--
-     <td>
-        <span class='country-key'>
-           <%= country.continent.name %>
-        </span>
-     </td>
--->
-     <td>
-        <%= country.title %>
-
-        <% if country.is_dependency? %>
-          (<%= country.parent.key.upcase %>)
-        <% end %>
-        
-       <span class='country-key'>
-         › <%= country.continent.name %>
-        <%= '*supra'      if country.is_supra?      %>
-        <% if country.is_dependency? %>
-          &nbsp; *dependency
-        <% end %>
-       </span>
-     </td>
-     <td style='white-space: nowrap;'>
-        <% if country.fifa.present? %>
-          <%= country.fifa %>
-          <% if country.fifa != country.code %>
-            <span class='code-ne'> &ne;</span>
-          <% end %>
-        <% else %>
-            <span class='code-x'>x</span>
-        <% end %>
-    </td>
-     <td>
-      <%= country.ioc %>
-     </td>
-     <td><%= country.code %></td>
-     <td  style='white-space: nowrap;'>
-        <% if country.alpha3.present? %>
-          <% if country.alpha3 != country.code %>
-            <span class='code-ne'>&ne; </span>
-          <% end %>
-          <%= country.alpha3 %>
-        <% else %>
-            <span class='code-x'>x</span>
-        <% end %>
-     </td>
-     <td>
-        <% if country.motor.present? %>
-            <%= country.motor %>
-        <% else %>
-            <span class='code-x'>x</span>
-        <% end %>
-     </td>
-     <td>
-      <%= country.fips %>
-     </td>
-     <td>
-       <%= country.num %>
-     </td>
-     <td>
-        <!-- check if un tag present
-           fix: find a better way!! -->
-        <% tags = country.tags.top.select { |tag| tag.key == 'un' } %>
-        <% if tags.size > 0 %>
-           Yes
-        <% else %>
-            <span class='code-x'>x</span>
-        <% end %>
-     </td>
-     <td>
-        <!-- check if un tag present
-           fix: find a better way!! -->
-        <% tags = country.tags.top.select { |tag| tag.key == 'fifa' } %>
-        <% if tags.size > 0 %>
-           Yes
-        <% else %>
-            <span class='code-x'>x</span>
-        <% end %>
-     </td>
-     <td>
-       <% if country.langs.count > 0 %>
-  <% country.langs.each_with_index do |lang,index| %>
-           <span class='lang-key'>
-             <%= lang.key %>
-           </span>
-           <%= lang.title %>
-   <% end %>
-       <% else %>
-            <span class='code-x'>x</span>
-       <% end %>
-     </td>     
-    </tr>
+    <%= erb :'shared/_table_row_country', locals: { country: country } %>
   <% end %><!-- each country -->
 </table>

@@ -37,6 +37,15 @@ get '/' do
                       }
 end
 
+get '/stats' do
+  erb :stats
+end
+
+get '/:key' do |key|
+  country = Country.find_by_key!( key )
+  
+  erb :country, locals: { country: country }
+end
 
 get '/r/:key' do |key|
 

@@ -1,0 +1,57 @@
+
+<h2>
+ <%= Country.where( 'alpha3 is not null' ).count %> Countries w/ ISO Codes
+</h2>
+
+<p>
+ <%= Country.where( 'alpha3 is null' ).count %> Countries w/o ISO Codes
+<p>
+
+<table>
+<%= erb :'shared/_table_header_country' %>
+
+<% Country.where( 'alpha3 is null' ).each do |country| %>
+  <%= erb :'shared/_table_row_country', locals: { country: country } %>
+<% end %>
+</table>
+
+
+<hr>
+
+
+<h2>
+ <%= Country.where( 'fifa is not null' ).count %> Countries w/ FIFA Codes
+</h2>
+
+<p>
+ <%= Country.where( 'fifa is null' ).count %> Countries w/o FIFA Codes
+<p>
+
+<table>
+<%= erb :'shared/_table_header_country' %>
+
+<% Country.where( 'fifa is null' ).each do |country| %>
+  <%= erb :'shared/_table_row_country', locals: { country: country } %>
+<% end %>
+</table>
+
+
+<hr>
+
+
+
+<h2>
+ <%= Country.where( 'ioc is not null' ).count %> Countries w/ IOC Codes
+</h2>
+
+<p>
+ <%= Country.where( 'ioc is null' ).count %> Countries w/o IOC Codes
+<p>
+
+<table>
+<%= erb :'shared/_table_header_country' %>
+
+<% Country.where( 'ioc is null' ).each do |country| %>
+  <%= erb :'shared/_table_row_country', locals: { country: country } %>
+<% end %>
+</table>
