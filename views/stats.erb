@@ -55,3 +55,25 @@
   <%= erb :'shared/_table_row_country', locals: { country: country } %>
 <% end %>
 </table>
+
+
+<!-- for debugging: check for countries w/o continent -->
+
+<% continent_missing_count = Country.where( 'continent_id is null').count
+   if continent_missing_count > 0
+ %>
+
+<hr>
+<h2>
+  FIX FIX FIX: <%= continent_missing_count %> Countries w/o Continent
+</h2>
+
+<table>
+<%= erb :'shared/_table_header_country' %>
+
+<% Country.where( 'continent_id is null' ).each do |country| %>
+  <%= erb :'shared/_table_row_country', locals: { country: country } %>
+<% end %>
+</table>
+
+<% end %>

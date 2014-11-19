@@ -27,7 +27,7 @@
         <% end %>
 
        <span class='country-key'>
-         › <%= country.continent.name %>
+         › <%= link_to_continent( country.continent ) %>
         <% if country.is_supra? %>
           &nbsp; *supra
         <% end %>
