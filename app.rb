@@ -1,6 +1,85 @@
 # encoding: utf-8
 
 
+class CountryCodeCursor
+
+  def initialize( codes )
+    @codes = codes
+  end
+
+  def each
+    code_groups = []
+
+    ## group codes by code.name & country.name
+    group = nil
+
+    last_code_name    = nil
+    last_country_name = nil
+
+    @codes.each_with_index do |code,i|
+      new_code    =  last_code_name != code.name
+      new_country =  last_country_name != code.country.name
+
+      if new_code || new_country
+        code_groups << group    if group
+        group = []
+      end
+
+      group << code
+
+      last_code_name     = code.name
+      last_country_name  = code.country.name
+    end
+
+    code_groups << group   if group
+
+
+    code_groups.each_with_index do |g,i|
+      yield(g,self)
+    end
+  end  # method each
+
+=begin
+  def old_each
+    prev_code_name    = nil
+    prev_country_name = nil
+
+    code_group = []
+
+    @codes.each_with_index do |code,i|
+      
+      if i >= @codes.size-1   # note: last entry has no next entry (guard/special case)
+        next_code_name = nil
+      else
+        next_code_name = @codes[i+1].name
+      end
+
+      begin_row =   prev_code_name != code.name
+      end_row   =   next_code_name != code.name
+
+      ## note: only flag new country if second (new) country in row
+      new_country = begin_row == false && prev_country_name != code.country.name
+
+      if
+
+      ## yield( code, self )
+
+      prev_code_name     = code.name
+      prev_country_name  = code.country.name
+    end
+  end
+=end
+
+  def begin_row?()   @begin_row; end
+  def end_row?()     @end_row;   end
+  def new_country?() @new_country; end
+
+
+end   # class CountryCodeCursor
+
+
+
+
 class CountryCodesApp < Sinatra::Base
 
 include WorldDb::Models    ## (re)use world.db models
@@ -36,6 +115,11 @@ get '/' do
                         where_clause:    where_clause
                       }
 end
+
+get '/codes' do
+  erb :codes
+end
+
 
 get '/stats' do
   erb :stats

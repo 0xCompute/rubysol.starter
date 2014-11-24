@@ -1,0 +1,21 @@
+
+<h2>
+  <%= CountryCode.count %> Codes
+</h2>
+
+
+<table>
+<% CountryCodeCursor.new( CountryCode.order( 'name,country_id') ).each do |g,c| %>
+
+  <tr>
+    <td> <%= g.first.name %>
+              |
+ <% g.each do |code| %>
+   <%= code.kind %>
+ <% end %>
+    => <%= g.first.country.name %> (<%= g.size %>)
+   </td>
+  </tr>
+
+<% end %>
+</table>
