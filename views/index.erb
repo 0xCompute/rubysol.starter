@@ -1,5 +1,21 @@
 
 
+<p>
+  <%= link_to 'World', '/' %>
+   <span class='country-count'>
+    (<%= Country.count %>)
+   </span>  ›
+
+<% Continent.order(:id).each_with_index do |continent,i| %>
+   <% if i > 0 %> • <% end %>
+   <%= link_to_continent( continent ) %>
+   <span class='country-count'>
+      (<%= continent.countries.count %>)
+   </span>
+<% end %>
+<p>
+
+
 <h2>
   <%= countries_count %> <%= title %>
     ›  

@@ -1,24 +1,20 @@
 
 <p>
-  <%= link_to 'Country Codes', '/' %> ||
+  Country Codes ||
 
-  
+  <%= link_to 'Countries A-Z', '/' %> •
+  <%= link_to 'Codes A-Z', '/codes' %> 
+   (
+  <%= link_to_codepage 'NET' %> •
+  <%= link_to_codepage 'A2' %> •
+  <%= link_to_codepage 'A3' %> •
+  <%= link_to_codepage 'FIFA' %> •
+  <%= link_to_codepage 'IOC' %> •
+  <%= link_to_codepage 'FIPS' %> •
+  <%= link_to_codepage 'M' %> •
+  <%= link_to_codepage 'NUM' %>
+   ) •
   <%= link_to 'Stats', '/stats' %> •
   <%= link_to 'About', 'https://github.com/worlddb/world.db.codes' %>
 
 </p>
-
-<p>
-  <%= link_to 'World', '/' %>
-   <span class='country-count'>
-    (<%= Country.count %>)
-   </span>  ›
-
-<% Continent.order(:id).each_with_index do |continent,i| %>
-   <% if i > 0 %> • <% end %>
-   <%= link_to_continent( continent ) %>
-   <span class='country-count'>
-      (<%= continent.countries.count %>)
-   </span>
-<% end %>
-<p>

@@ -1,0 +1,33 @@
+
+<h2>
+ <%= name.upcase %> - <%= codes_count %> Codes
+</h2>
+
+<table>
+<% codes.each do |code|
+     country = code.country
+ %>
+ <tr>
+   <td>
+     <%= link_to_codepage( code.kind ) %>
+   </td>
+   <td>
+     <%= link_to_country( country ) %>
+
+        <% if country.is_dependency? %>
+          <%= link_to( "(#{country.parent.key.upcase})", "/#{country.parent.key}" ) %>
+        <% end %>
+
+       <span class='country-key'>
+         › <%= link_to_continent( country.continent ) %>
+        <% if country.is_supra? %>
+          &nbsp; *supra
+        <% end %>
+        <% if country.is_dependency? %>
+          &nbsp; *dependency
+        <% end %>
+       </span>
+   </td>
+ </tr>
+<% end %>
+</table>

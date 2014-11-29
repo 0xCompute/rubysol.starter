@@ -1,21 +1,50 @@
 
 <h2>
-  <%= CountryCode.count %> Codes
+  Codes A-Z
 </h2>
 
 
 <table>
-<% CountryCodeCursor.new( CountryCode.order( 'name,country_id') ).each do |g,c| %>
+<%  groups = codes_group_by_name_and_country( CountryCode.order( 'UPPER(name),country_id') )
+    groups.each do |group_cty|
 
-  <tr>
-    <td> <%= g.first.name %>
-              |
- <% g.each do |code| %>
+     next  if group_cty[0][0].name =~ /^[0-9]+$/    ## skip numeric only codes
+  %>
+
+<tr>
+  <td> 
+      <%= group_cty[0][0].name.upcase %>
+    <% if group_cty.size > 1 %><!-- code w/ more than one(!) country!! -->
+      <span class='country-key'>
+       (<%= group_cty.size %>) 
+      </span>
+    <% end %>
+  </td>
+  <td>
+    <% if group_cty.size > 1 %><!-- code w/ more than one(!) country!! -->
+     <span class='code-ne'>
+         &ne;
+     </span>
+    <% end %>
+<%     group_cty.each do |group_code|
+          country = group_code[0].country
+ %>
+  <%= link_to_country( country ) %>
+  <% if country.is_dependency? %>
+    (<%= country.parent.key.upcase %>)
+  <% end %>
+   -
+  <span class='country-key'>
+<%       group_code.each do |code| %>
    <%= code.kind %>
- <% end %>
-    => <%= g.first.country.name %> (<%= g.size %>)
-   </td>
-  </tr>
-
-<% end %>
+<%        end %><!-- each code -->
+  </span>
+  <span class='country-key'>
+     (<%= group_code.size %>)
+  </span>
+<%      end %><!-- each group code -->
+  </td>
+</tr>
+<%    end %><!-- each group cty -->
 </table>
+

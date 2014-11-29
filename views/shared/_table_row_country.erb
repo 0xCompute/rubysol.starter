@@ -6,14 +6,14 @@
           <% if country.net != country.key %>
             <span class='code-ne'>&ne; </span>
           <% end %>
-          .<%= country.net %>
+          .<%= link_to_code( country.net ) %>
         <% else %>
             <span class='code-x'>x|net</span>
         <% end %>
      </td>
      <td>
        <% if country.alpha2.present? %>
-           <%= country.alpha2 %> 
+           <%= link_to_code( country.alpha2 ) %> 
        <% else %>
            <span class='code-x'>x|a2</span>
        <% end %>
@@ -37,13 +37,13 @@
        </span>
      </td>
 
-     <td><%= country.code %></td>
+     <td><%= link_to_code( country.code ) %></td>
      <td style='white-space: nowrap;'>
         <% if country.fifa.present? %>
           <% if country.fifa != country.code %>
             <span class='code-ne'> &ne;</span>
           <% end %>
-          <%= country.fifa %>
+          <%= link_to_code( country.fifa ) %>
         <% else %>
             <span class='code-x'>x|fifa</span>
         <% end %>
@@ -53,7 +53,7 @@
           <% if country.ioc != country.code %>
             <span class='code-ne'>&ne; </span>
           <% end %>
-         <%= country.ioc %>
+         <%= link_to_code( country.ioc ) %>
       <% else %>
          <span class='code-x'>x|ioc</span>
       <% end %>
@@ -63,21 +63,21 @@
           <% if country.alpha3 != country.code %>
             <span class='code-ne'>&ne; </span>
           <% end %>
-          <%= country.alpha3 %>
+          <%= link_to_code( country.alpha3 ) %>
         <% else %>
             <span class='code-x'>x|a3</span>
         <% end %>
      </td>
      <td>
         <% if country.motor.present? %>
-            <%= country.motor %>
+            <%= link_to_code( country.motor ) %>
         <% else %>
             <span class='code-x'>x|m</span>
         <% end %>
      </td>
      <td>
         <% if country.fips.present? %>
-          <%= country.fips %>
+          <%= link_to_code( country.fips ) %>
         <% else %>
             <span class='code-x'>x|fips</span>
         <% end %>
