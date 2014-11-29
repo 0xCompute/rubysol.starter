@@ -17,6 +17,10 @@ GEM
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     daemons (1.1.9)
+    datafile (0.1.0)
+      fetcher
+      logutils
+      textutils
     eventmachine (1.0.3)
     fetcher (0.4.4)
       logutils (>= 0.6)
@@ -66,6 +70,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  datafile
   fetcher
   pg
   sinatra

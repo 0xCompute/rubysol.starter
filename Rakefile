@@ -2,34 +2,25 @@
 require './boot'   ## NOTE: will setup environemnt (that is, database connection)
 
 
-####
-# download tasks for zips
+require 'datafile'
 
-def dowload_archive( url, dest )
-  puts "downloading #{url} to #{dest}..."
-  worker = Fetcher::Worker.new
-  worker.copy( url, dest )
+datafile =<<EOS
+  ## Datfile configuration (for now keep it inline)
+  world 'openmundi/world.db', setup: 'countries'
+EOS
 
-  puts "size: #{File.size(dest)} bytes"  ## print some file stats
-end
-
-
-ZIP_PATH    = "./tmp"
-
-WORLD_NAME  = 'world.db'
-WORLD_URL   = "https://github.com/openmundi/#{WORLD_NAME}/archive/master.zip"
-WORLD_ZIP   = "#{ZIP_PATH}/#{WORLD_NAME}.zip"
+DATAFILE = Datafile::Builder.load( datafile ).datafile
 
 
 ## download world.db dataset
 task :dl_world do
-  dowload_archive( WORLD_URL, WORLD_ZIP )
+  DATAFILE.download
 end
 
 ## import world.db dataset
 task :load_world => [:delete_world] do
   # NOTE: assume env (database connection) is setup
-  WorldDb.read_setup_from_zip( WORLD_NAME, 'setups/countries', ZIP_PATH, { skip_tags: true } )
+  DATAFILE.read
 end
 
 task :update_world do
@@ -51,7 +42,7 @@ task :create_world do
   WorldDb.create
 end
 
-task :setup_world => [:dl_world,:create_world,:load_world] do
+task :setup_world => [:dl_world,:create_world,:load_world,:update_world] do
   ## all work done by dependencies
 end
 

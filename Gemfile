@@ -23,4 +23,5 @@ gem 'thin'    # use faster multiplexed (w/ eventmachine) web server
 
 ## our own gems
 gem 'worlddb'
+gem 'datafile'
 
