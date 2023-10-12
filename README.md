@@ -18,9 +18,9 @@ gem install rubidity
 
 ##  Usage 
 
-### Step 1 - Try Out Some Ccntracts
+### Step 1 - Try Out Some Contracts
 
-Let's try the PublicMintER20 Contacract...
+Let's try the PublicMintER20 Contract...
 
 [contracts/public_mint_erc20.rb](/contracts/public_mint_erc20.rb):
 
