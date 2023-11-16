@@ -1,17 +1,19 @@
-# rubididty quick starter - run rubidity (with 100%-solidity compatible data types & abis) in your own home for fun & profit (for free)
+# rubysol quick starter - run rubysol contracts (with 100%-solidity compatible data types & abis) in your own home for fun & profit (for free)
 
 
-## What's Solidity?! What's Rubidity?!
+## What's Solidity?! What's Rubidity?! What's Rubysol?!
 
 See [**Solidity - Contract Application Binary Interface (ABI) Specification** »](https://docs.soliditylang.org/en/latest/abi-spec.html)
 
 See [**Rubidity - Ruby for Layer 1 (L1) Contracts / Protocols with "Off-Chain" Indexer**  »](https://github.com/s6ruby/rubidity)
 
+See [**Rubysol - Ruby for Layer 1 (L1) Contracts / Protocols with "Off-Chain" Indexer**  »]([https://github.com/s6ruby/rubidity](https://github.com/s6ruby/rubidity/tree/master/rubysol))
 
-## Step 0 - Install Rubidity (Ruby Package)
+
+## Step 0 - Install Rubysol (Ruby Package)
 
 ``` ruby
-gem install rubidity
+gem install rubysol
 ```
 
 
@@ -122,7 +124,7 @@ end
 Let's go.
 
 ``` ruby
-require 'rubidity'
+require 'rubysol'
 
 require_relative 'erc20'
 require_relative 'public_mint_erc20'
@@ -239,7 +241,7 @@ at the ruby code commons (rubycocos) org.
 
 ## Questions? Comments?
 
-Join us in the [Rubidity (community) discord (chat server)](https://discord.gg/3JRnDUap6y). Yes you can.
+Join us in the [Rubidity & Rubysol (community) discord (chat server)](https://discord.gg/3JRnDUap6y). Yes you can.
 Your questions and commentary welcome.
 
 Or post them over at the [Help & Support](https://github.com/geraldb/help) page. Thanks.
