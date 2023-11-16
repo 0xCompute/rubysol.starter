@@ -1,6 +1,6 @@
 ######
 # Let's try the PublicMintER20 Contacract...
-require 'rubidity'
+require 'rubysol'
 
 require_relative 'contracts/erc20'
 require_relative 'contracts/public_mint_erc20'
