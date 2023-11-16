@@ -7,7 +7,7 @@ See [**Solidity - Contract Application Binary Interface (ABI) Specification** »
 
 See [**Rubidity - Ruby for Layer 1 (L1) Contracts / Protocols with "Off-Chain" Indexer**  »](https://github.com/s6ruby/rubidity)
 
-See [**Rubysol - Ruby for Layer 1 (L1) Contracts / Protocols with "Off-Chain" Indexer**  »]([https://github.com/s6ruby/rubidity](https://github.com/s6ruby/rubidity/tree/master/rubysol))
+See [**Rubysol - Ruby for Layer 1 (L1) Contracts / Protocols with "Off-Chain" Indexer**  »](https://github.com/s6ruby/rubidity/tree/master/rubysol)
 
 
 ## Step 0 - Install Rubysol (Ruby Package)
